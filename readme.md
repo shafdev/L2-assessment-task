@@ -9,6 +9,8 @@ You are given reports of intermittent performance issues from a customer's websi
 3.  `traffic.db`: A SQLite database file with a table `request_logs` containing fields: `timestamp`, `ip_address`, `status_code`, `response_time_ms`, `bytes_sent`.
 4.  Instructions: This document with tasks and deliverables.
 
+These can be accessed from our [GitHub Repository](https://github.com/SuyunCDN/L2-assessment).
+
 ## Tasks
 
 ### 1. Nginx Log Analysis
@@ -67,6 +69,8 @@ Candidates must submit:
     * Bug fixes for Task 2.
     * Explanation of attack detection script (Task 3).
     * Optional CDN optimization recommendation (Task 5).
+
+  To submit this assessment, create a fork of the [GitHub Repository](https://github.com/SuyunCDN/L2-assessment) and issue a Pull Request with your solutions, under a dedicated folder of your full name (hiphenized). Additionally, send an email reply to your assessment notifying about the completion, along with the link to the Pull Request.
 
 > [!CAUTION]
 > Ensure all deliverables are submitted within the specified time frame communicated over email.
