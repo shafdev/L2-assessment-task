@@ -70,7 +70,7 @@ Candidates must submit:
     * Explanation of attack detection script (Task 3).
     * Optional CDN optimization recommendation (Task 5).
 
-  To submit this assessment, create a fork of the [GitHub Repository](https://github.com/SuyunCDN/L2-assessment) and issue a Pull Request with your solutions, under a dedicated folder of your full name (hiphenized). Additionally, send an email reply to your assessment notifying about the completion, along with the link to the Pull Request.
+  To submit this assessment, create a repo under your own GitHub account, push the solution code and other outputs as mentioned above, and email us back with the repository link.
 
 > [!CAUTION]
 > Ensure all deliverables are submitted within the specified time frame communicated over email.
