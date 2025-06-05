@@ -1,0 +1,19 @@
+Bug fixes for Task 2:
+    #Bug: status is a string, but function is_error_status() compares it numerically
+
+
+Explanation of attack detection script: 
+    High Request Rate
+
+        The script tracks how many requests each IP address makes within a rolling 1-minute window.
+        If an IP makes more than 100 requests in a minute, it is considered suspicious and flagged.
+
+    High Error Rate
+
+        The script counts total and error responses (HTTP status codes from 400 to 599) per IP.
+        If an IP has made at least 20 requests, and more than 50% of those are errors, it is flagged for potentially malicious behavior (e.g., probing non-existent endpoints or brute-force attempts).
+
+    Accessing Suspicious Endpoints
+
+        A list of common admin or sensitive endpoints (/admin, /login,) is monitored.
+        If an IP accesses these more than 10 times, it may indicate unauthorized access attempts and is flagged accordingly.

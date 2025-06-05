@@ -2,15 +2,22 @@ import re
 from datetime import datetime
 
 def parse_log_line(log_line):
-    pattern = r'(\d+\.\d+\.\d+\.\d+) - (\w+) \[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})\] "(\w+\.\w+\.\w+)" "(\w+ /.+ HTTP/\d\.\d)" (\d+) (\d+) (\d+)'
+    pattern = r'(\d+\.\d+\.\d+\.\d+) - (\w+) \[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})\] "(\w+\.\w+\.\w+)" "(\w+) (/[^\s]+) (HTTP/\d\.\d)" (\d+) (\d+) (\d+)' #
+    
+
     match = re.match(pattern, log_line)
     if match:
-        ip, action, timestamp_str, domain, request, status, bytes_sent, unknown = match.groups()
+        # print(match.groups())
+        # return
+        ip, action, timestamp_str, domain, method, path, protocol, status, bytes_sent, unknown = match.groups()
         timestamp = datetime.strptime(timestamp_str, '%d/%b/%Y:%H:%M:%S %z')
         return {
             'timestamp': timestamp,
-            'status': status,
-            'ip': ip
+            'status':  int(status),
+            'ip': ip,
+            'method':method,
+            'bytes_sent':int(bytes_sent),
+            'path':path
         }
     else:
         return None
@@ -53,8 +60,12 @@ def monitor_logs(log_file):
         if is_error_status(status):
             window_errors += 1
 
-    error_rate = window_errors / window_requests
-    if error_rate > error_threshold:
-        print(f"Alert! Error rate {error_rate}% exceeds threshold at {current_window_start}")
+    if window_requests > 0:
+        error_rate = window_errors / window_requests
+        if error_rate > error_threshold:
+            print(f"Alert! Error rate {error_rate}% exceeds threshold at {current_window_start}")
 
-monitor_logs('nginx_access.log')
+if __name__ == '__name__':
+    monitor_logs('nginx_access.log')
+
+#Bug: status is a string, but function is_error_status() compares it numerically

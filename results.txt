@@ -1,0 +1,84 @@
+Task 1
+Top IPs:
+  1-> IP :221.34.171.155   Count :383
+  2-> IP :145.98.68.30   Count :380
+  3-> IP :110.105.174.63   Count :361
+  4-> IP :24.74.238.114   Count :355
+  5-> IP :32.90.145.204   Count :354
+  6-> IP :49.217.128.165   Count :352
+average response size in bytes: 2529.284898477157
+percentage of requests with status codes in the 400-599 range: 48.95 %
+
+
+Task 4:
+query: 
+SELECT  strftime('%H', timestamp) AS hour, AVG(response_time_ms) AS avg_resp FROM request_logs GROUP BY hour ORDER BY avg_resp DESC LIMIT 1;
+result:
+hour  avg_resp        
+----  ----------------
+22    905.177514792899
+
+query: 
+SELECT ip_address,  COUNT(*) AS request_count FROM request_logs WHERE status_code = 429 GROUP BY ip_address HAVING COUNT(*) > 350;
+result:
+ip_address       request_count
+---------------  -------------
+119.103.226.136  358          
+122.157.29.219   363  
+
+query: 
+SELECT SUM(bytes_sent) AS total_bytes_sent FROM request_logs WHERE response_time_ms > 500;
+result:
+total_bytes_sent
+----------------
+10719865 
+
+TASK 3 :
+Suspicious IPs detected:
+IP: 49.17.221.77
+  Total requests: 350
+  Errors: 229 (error rate: 0.65)
+  Requests in last minute: 86
+  Suspicious endpoint hits: 350
+
+IP: 145.98.68.30
+  Total requests: 380
+  Errors: 241 (error rate: 0.63)
+  Requests in last minute: 348
+  Suspicious endpoint hits: 380
+
+IP: 110.105.174.63
+  Total requests: 361
+  Errors: 239 (error rate: 0.66)
+  Requests in last minute: 352
+  Suspicious endpoint hits: 361
+
+IP: 221.34.171.155
+  Total requests: 383
+  Errors: 244 (error rate: 0.64)
+  Requests in last minute: 122
+  Suspicious endpoint hits: 383
+
+IP: 24.74.238.114
+  Total requests: 355
+  Errors: 248 (error rate: 0.70)
+  Requests in last minute: 259
+  Suspicious endpoint hits: 355
+
+IP: 188.230.178.192
+  Total requests: 315
+  Errors: 225 (error rate: 0.71)
+  Requests in last minute: 74
+  Suspicious endpoint hits: 315
+
+IP: 32.90.145.204
+  Total requests: 354
+  Errors: 236 (error rate: 0.67)
+  Requests in last minute: 31
+  Suspicious endpoint hits: 354
+
+IP: 49.217.128.165
+  Total requests: 352
+  Errors: 232 (error rate: 0.66)
+  Requests in last minute: 267
+  Suspicious endpoint hits: 352
